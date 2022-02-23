@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import service.IProductService;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,6 +42,9 @@ public class ProductServiceImpl implements IProductService {
     public void update(Product product) {
         for (Product product1: products) {
             if (product1.getId() == product.getId()){
+                if (Objects.requireNonNull(product.getImage().getOriginalFilename()).equalsIgnoreCase("")){
+                    product.setImage(product1.getImage());
+                }
                 products.remove(product1);
                 products.add(product);
                 break;
