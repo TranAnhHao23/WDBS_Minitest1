@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import service.IProductService;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ProductServiceImpl implements IProductService {
@@ -55,9 +57,13 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public ArrayList<Product> findByName(String name) {
         ArrayList<Product> products1 = new ArrayList<>();
-        for (Product prod: products) {
-            if (prod.getName().equalsIgnoreCase(name)){
-                products1.add(prod);
+        String regex = ".*" + name + ".*";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher;
+        for (Product product : products) {
+            matcher = pattern.matcher(product.getName());
+            if (matcher.find()) {
+                products1.add(product);
             }
         }
         return products1;
