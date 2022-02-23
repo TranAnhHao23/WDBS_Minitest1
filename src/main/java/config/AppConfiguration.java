@@ -19,12 +19,14 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import service.IProductService;
+import service.impl.ProductServiceImpl;
 
 import java.io.IOException;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("java")
+@ComponentScan("controllers")
 @PropertySource("classpath:upload_file.properties")
 public class AppConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
     private ApplicationContext applicationContext;
@@ -70,7 +72,7 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/songs/**")
+        registry.addResourceHandler("/image/**")
                 .addResourceLocations("file:" + fileUpload);
     }
 
@@ -81,9 +83,9 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
         return resolver;
     }
 
-//    @Bean
-//    public IProductService productService(){
-//        return new ProductService();
-//    }
+    @Bean
+    public IProductService productService(){
+        return new ProductServiceImpl();
+    }
 
 }

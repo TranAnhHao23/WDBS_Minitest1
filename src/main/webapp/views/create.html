@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>Add Product</h3>
+<p>
+    <a th:href="@{/home}">
+        Back to product list
+    </a>
+</p>
+<div id="form">
+    <form th:action="@{/home}" th:object="${product}"
+          th:method="POST" novalidate="novalidate" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Name</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>Price</label>
+            <input type="text" th:field="*{price}"/>
+        </div>
+        <div>
+            <label>Description</label>
+            <input type="text" th:field="*{description}"/>
+        </div>
+<!--        <div th:unless="${product.getImage.getOriginalFilename().equals('')}">-->
+<!--            <img style="width: 20px; height: 20px" th:src="@{${file} + *{image.getOriginalFilename()}}"-->
+<!--                 alt="none">-->
+<!--            <p>Hello</p>-->
+<!--        </div>-->
+        <div>
+            <label>Image</label>
+            <input type="file" th:field="*{image}">
+            <span th:unless="${path.equals('')}">
+            <img style="width: 20px; height: 20px" th:src="@{${file} + ${path}}"
+                 alt="none">
+        </span>
+            <!--            <img style="width: 10px; height: 10px" th:src="@{${file} + ${product.getImage().getOriginalFilename()}}" alt="none">-->
+        </div>
+
+        <input type="submit" value="Submit"/>
+    </form>
+
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

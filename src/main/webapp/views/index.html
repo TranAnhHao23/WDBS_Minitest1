@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Product Management</h3>
+<p>
+    <a th:href="@{/home/create}">
+        Add new product
+    </a>
+</p>
+<div th:if="${products.isEmpty() == false}">
+    <table id="products">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>DELETE</th>
+            <th>EDIT</th>
+            <th>VIEW</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+            <td><img width="100" height="100" th:src="@{${file} + ${product.getImage().getOriginalFilename()}}" alt="nothing tho show"></td>
+            <td><a th:href="@{/home/delete/{id}(id=${product.id})}">DELETE</a></td>
+            <td><a th:href="@{/home/edit/{id}(id=${product.id})}">EDIT</a></td>
+            <td><a th:href="@{/home/view/{id}(id=${product.id})}">VIEW</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
