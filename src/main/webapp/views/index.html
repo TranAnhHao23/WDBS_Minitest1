@@ -4,11 +4,20 @@
 </head>
 <body>
 <h3>Product Management</h3>
-<p>
-    <a th:href="@{/home/create}">
-        Add new product
-    </a>
-</p>
+<div>
+    <p>
+        <a th:href="@{/home/create}">
+            Add new product
+        </a>
+    </p>
+</div>
+<div>
+    <form th:action="@{/home/search}" method="post">
+        <label for="name"><input type="search" id="name" name="search"></label>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
 <div th:if="${products.isEmpty() == false}">
     <table id="products">
         <thead>

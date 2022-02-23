@@ -106,4 +106,18 @@ public class ProductController {
         modelAndView.addObject("product", product);
         return modelAndView;
     }
+
+    @PostMapping("/search")
+    public ModelAndView searchByName(@RequestParam(name = "search",required = false) String name){
+        ModelAndView modelAndView = new ModelAndView("index");
+        ArrayList<Product> products;
+        if (name.equals("")){
+            products = productService.getAll();
+        } else {
+            products = productService.findByName(name);
+        }
+        modelAndView.addObject("file", view);
+        modelAndView.addObject("products",products);
+        return modelAndView;
+    }
 }

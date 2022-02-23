@@ -51,4 +51,15 @@ public class ProductServiceImpl implements IProductService {
         Product product = findById(id);
         products.remove(product);
     }
+
+    @Override
+    public ArrayList<Product> findByName(String name) {
+        ArrayList<Product> products1 = new ArrayList<>();
+        for (Product prod: products) {
+            if (prod.getName().equalsIgnoreCase(name)){
+                products1.add(prod);
+            }
+        }
+        return products1;
+    }
 }
